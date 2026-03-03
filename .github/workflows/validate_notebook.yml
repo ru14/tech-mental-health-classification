@@ -1,0 +1,55 @@
+name: Validate Notebook
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  run-notebook:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt nbconvert
+
+      - name: Execute notebook
+        run: |
+          jupyter nbconvert --to notebook --execute \
+            --ExecutePreprocessor.timeout=600 \
+            notebooks/mental_health_analysis.ipynb \
+            --output /tmp/executed_notebook.ipynb
+
+      - name: Verify notebook executed successfully
+        run: python - <<'EOF'
+import json
+
+with open("/tmp/executed_notebook.ipynb") as f:
+    nb = json.load(f)
+
+errors = []
+for i, cell in enumerate(nb["cells"]):
+    if cell["cell_type"] == "code":
+        for output in cell.get("outputs", []):
+            if output.get("output_type") == "error":
+                errors.append(
+                    f"Cell {i}: {output['ename']}: {output['evalue']}"
+                )
+
+if errors:
+    print("Notebook execution errors:")
+    for e in errors:
+        print(f"  {e}")
+    raise SystemExit(1)
+
+print(f"All {len(nb['cells'])} cells executed without errors.")
+EOF
