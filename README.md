@@ -40,7 +40,7 @@ This project follows the six CRISP-DM phases:
 1. **Business Understanding** – Define the prediction problem and success criteria
 2. **Data Understanding** – Explore the dataset, check distributions and missing values
 3. **Data Preparation** – Clean data, handle outliers, engineer features, encode variables
-4. **Modeling** – Train Logistic Regression (baseline) and Random Forest with GridSearchCV
+4. **Modeling** – Train Logistic Regression (baseline), Random Forest, and Decision Tree with GridSearchCV
 5. **Evaluation** – Compare models using Accuracy, Precision, Recall, and F1-score
 6. **Deployment & Recommendations** – Derive actionable business insights
 
@@ -49,7 +49,7 @@ This project follows the six CRISP-DM phases:
 - **Family history** of mental illness is the strongest predictor of treatment-seeking behavior
 - Employees with access to **mental health benefits** are significantly more likely to seek treatment
 - **Workplace anonymity** and **supervisor support** are critical enablers
-- **Random Forest** outperformed Logistic Regression, achieving an F1 score of ~0.81
+- **Logistic Regression**, **Random Forest**, and **Decision Tree** were compared across Accuracy, Precision, Recall, and F1-score
 
 ## Business Recommendations
 
