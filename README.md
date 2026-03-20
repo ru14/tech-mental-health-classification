@@ -1,31 +1,31 @@
-### Mental Health in Tech – Predicting Treatment-Seeking Behavior
+# Mental Health in Tech – Treatment Prediction
 
-**Raginee Upadhyaya**
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.0+-F7931E?logo=scikitlearn&logoColor=white)
+![SHAP](https://img.shields.io/badge/SHAP-Explainability-blueviolet)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
 
-#### Executive summary
+> **Can we predict whether a tech employee will seek mental health treatment based on workplace and demographic factors?**
 
-This project applies the CRISP-DM framework and machine learning classification models to predict whether a tech industry employee will seek mental health treatment. Using the OSMI Mental Health in Tech Survey dataset (1,259 respondents), we trained and evaluated Logistic Regression, Random Forest, and Decision Tree classifiers. The analysis identifies key workplace and demographic factors — such as family history, access to mental health benefits, and supervisor support — that drive treatment-seeking behavior, and translates findings into actionable recommendations for tech organizations.
+**Author:** Raginee Upadhyaya
 
-#### Rationale
-Why should anyone care about this question?
+---
 
-Mental health issues are highly prevalent in the tech industry. Unaddressed mental health conditions lead to decreased productivity, increased absenteeism, and higher employee turnover. Identifying the factors that predict whether an employee will seek treatment enables organizations to design more effective benefit programs, reduce workplace stigma, and proactively support their workforce — ultimately benefiting both employees and business outcomes.
+## Executive Summary
 
-#### Research Question
-What are you trying to answer?
+This project applies the **CRISP-DM** framework and machine learning to predict treatment-seeking behavior among tech employees. Using the [OSMI Mental Health in Tech Survey](https://osmihelp.org/research) (1,259 respondents), we trained Logistic Regression, Random Forest, and Decision Tree classifiers, then used **SHAP** to explain which workplace and demographic factors drive predictions. The analysis delivers actionable recommendations for tech organizations seeking to improve mental health support.
 
-Can we predict whether a tech employee will seek mental health treatment based on workplace and demographic factors? Which features (e.g., access to benefits, anonymity protections, supervisor support, family history) are most predictive of treatment-seeking behavior?
+---
 
-#### Data Sources
-What data will you use to answer your question?
+## Dataset
 
-The dataset (`data/survey.csv`) is sourced from the [OSMI Mental Health in Tech Survey](https://osmihelp.org/research). It contains 1,259 responses from tech industry employees and includes the following key columns:
+**Source:** [OSMI Mental Health in Tech Survey](https://www.kaggle.com/datasets/osmi/mental-health-in-tech-survey) &nbsp;|&nbsp; **Records:** 1,259 &nbsp;|&nbsp; **Features:** 27
 
 | Column | Description |
 |--------|-------------|
 | `Age` | Respondent age |
 | `Gender` | Respondent gender |
-| `Country` | Country of employment |
 | `family_history` | Family history of mental illness (Yes/No) |
 | `treatment` | **Target** – sought mental health treatment (Yes/No) |
 | `work_interfere` | How often mental health interferes with work |
@@ -36,44 +36,110 @@ The dataset (`data/survey.csv`) is sourced from the [OSMI Mental Health in Tech 
 | `no_employees` | Company size |
 | `remote_work` | Whether the respondent works remotely |
 
-#### Methodology
-What methods are you using to answer the question?
+---
 
-This project follows the six phases of the **CRISP-DM** (Cross-Industry Standard Process for Data Mining) framework:
+## Methodology
+
+This project follows the six phases of **CRISP-DM**:
 
 ![CRISP-DM Diagram](images/crisp_dm_diagram.png)
 
-1. **Business Understanding** – Define the prediction problem and success criteria
-2. **Data Understanding** – Explore the dataset, check distributions and missing values
-3. **Data Preparation** – Clean data, handle outliers, engineer features, encode categorical variables
-4. **Modeling** – Train Logistic Regression (baseline), Random Forest, and Decision Tree with GridSearchCV hyperparameter tuning
-5. **Evaluation** – Compare models using Accuracy, Precision, Recall, and F1-score
-6. **Deployment & Recommendations** – Derive actionable business insights from model results
+| Phase | Description |
+|-------|-------------|
+| **1. Business Understanding** | Define prediction problem and success criteria (F1 ≥ 0.75) |
+| **2. Data Understanding** | Explore distributions, missing values, and class balance |
+| **3. Data Preparation** | Clean ages, standardize gender, handle missing values, encode features, engineer age groups |
+| **4. Modeling** | Logistic Regression (baseline), Random Forest, and Decision Tree with GridSearchCV tuning |
+| **5. Evaluation** | Compare models on Accuracy, Precision, Recall, and F1-score; 5-fold cross-validation |
+| **6. Deployment** | SHAP explainability + actionable business recommendations |
 
-#### Results
-What did your research find?
+---
 
-- **Family history** of mental illness is the strongest predictor of treatment-seeking behavior
-- Employees with access to **mental health benefits** are significantly more likely to seek treatment
-- **Workplace anonymity** and **supervisor support** are critical enablers of treatment-seeking
-- **Logistic Regression**, **Random Forest**, and **Decision Tree** were compared; all models achieved competitive performance on Accuracy, Precision, Recall, and F1-score
+## Results
 
-#### Next steps
-What suggestions do you have for next steps?
+| Model | Accuracy | Precision | Recall | F1 Score |
+|-------|----------|-----------|--------|----------|
+| Logistic Regression | ~0.80 | ~0.80 | ~0.82 | ~0.81 |
+| **Random Forest** | **~0.80** | **~0.79** | **~0.84** | **~0.81** |
+| Decision Tree | ~0.75 | ~0.76 | ~0.78 | ~0.77 |
 
-1. **Improve mental health benefit awareness** – Communicate available resources clearly during onboarding and annually
-2. **Ensure confidentiality** – Guarantee anonymity for mental health disclosures to reduce stigma around seeking help
-3. **Train supervisors** – Provide mental health first aid training for all managers
-4. **Address stigma** – Normalize mental health conversations through company-wide culture initiatives
-5. **Support remote workers** – Offer virtual mental health resources and regular check-ins for distributed teams
-6. **Expand the dataset** – Incorporate more recent survey years and additional workplace variables to improve model generalizability
+- All models exceeded the F1 ≥ 0.75 success criterion
+- Random Forest selected as the primary model for its strong recall and ensemble stability
 
-#### Outline of project
+---
 
-- [Link to Mental Health Analysis Notebook](notebooks/mental_health_analysis.ipynb)
+## SHAP Explainability
 
+SHAP (SHapley Additive exPlanations) provides transparent, model-agnostic feature attributions:
 
-##### Contact and Further Information
+- **Global importance** — `shap.summary_plot` reveals which features matter most across all predictions
+- **Local explanations** — `shap.force_plot` shows exactly why the model predicted treatment (or not) for an individual employee
 
-For questions or further information about this project, please reach out via the [GitHub repository](https://github.com/ru14/tech-mental-health-classification).
+**Top predictive features (SHAP-ranked):**
+
+| Rank | Feature | Direction |
+|------|---------|-----------|
+| 1 | `family_history` | Employees with family history are far more likely to seek treatment |
+| 2 | `work_interfere` | Higher work interference → higher treatment likelihood |
+| 3 | `benefits` | Access to benefits increases treatment-seeking |
+| 4 | `care_options` | Awareness of care options is a strong positive driver |
+| 5 | `anonymity` | Protected anonymity encourages treatment-seeking |
+
+---
+
+## Actionable Recommendations
+
+| Finding | Recommendation |
+|---------|----------------|
+| Family history is the strongest predictor | Increase awareness for **all** employees, not just those with family history |
+| Benefits availability increases treatment rates | Communicate mental health benefits clearly during onboarding and annually |
+| Workplace anonymity matters | Guarantee confidentiality of mental health disclosures |
+| Supervisor support is critical | Provide mental health first-aid training for all managers |
+| Work interference is highly predictive | Offer flexible work arrangements and Employee Assistance Programs |
+| Remote workers may lack access | Provide virtual mental health support and regular check-ins |
+
+---
+
+## Project Structure
+
+```
+tech-mental-health-classification/
+├── README.md
+├── requirements.txt
+├── data/
+│   └── survey.csv
+├── images/
+│   ├── crisp_dm_diagram.png
+│   └── mental-health-in-tech.png
+└── notebooks/
+    └── mental_health_analysis.ipynb
+```
+
+---
+
+## Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/ru14/tech-mental-health-classification.git
+cd tech-mental-health-classification
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Launch the notebook
+jupyter notebook notebooks/mental_health_analysis.ipynb
+```
+
+---
+
+## Notebook
+
+[**mental_health_analysis.ipynb**](notebooks/mental_health_analysis.ipynb) — Full CRISP-DM pipeline: data cleaning, EDA, modeling, evaluation, SHAP explainability, and business recommendations.
+
+---
+
+## Contact
+
+For questions or feedback, reach out via the [GitHub repository](https://github.com/ru14/tech-mental-health-classification).
 
