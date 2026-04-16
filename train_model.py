@@ -11,6 +11,9 @@ Usage:
 import joblib
 import numpy as np
 import pandas as pd
+
+MIN_AGE = 15
+MAX_AGE = 100
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
@@ -33,7 +36,7 @@ for col in df.select_dtypes(include="object").columns:
     df[col] = df[col].fillna("Unknown")
 
 # Remove unrealistic ages
-df = df[(df["Age"] > 15) & (df["Age"] < 100)]
+df = df[(df["Age"] > MIN_AGE) & (df["Age"] < MAX_AGE)]
 
 # Remove duplicates
 df.drop_duplicates(inplace=True)
