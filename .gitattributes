@@ -1,0 +1,26 @@
+# Normalise line endings to LF across platforms
+* text=auto eol=lf
+
+# Treat CSV files as text so Git can diff them
+*.csv text eol=lf
+
+# Binary image files — no diff, no merge
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.svg binary
+
+# Jupyter notebooks — treat as text (nbstripout handles output stripping)
+*.ipynb text eol=lf
+
+# Model artefacts — binary, no diff
+*.pkl binary
+*.joblib binary
+*.h5 binary
+*.pt binary
+*.pth binary
+*.onnx binary
+
+# Linguist — mark notebooks as Jupyter Notebook language
+*.ipynb linguist-language=Jupyter Notebook

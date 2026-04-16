@@ -1,0 +1,20 @@
+# Code owners — these users/teams are automatically requested for review
+# when a pull request modifies the matched files.
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owner — reviews all PRs by default
+*                           @ru14
+
+# Notebooks — require author review for any ML pipeline change
+notebooks/                  @ru14
+
+# Data — extra care around raw survey data
+data/                       @ru14
+
+# CI/CD workflows — protect pipeline integrity
+.github/                    @ru14
+
+# Security files — must be reviewed carefully
+SECURITY.md                 @ru14
+requirements.txt            @ru14
+requirements-dev.txt        @ru14

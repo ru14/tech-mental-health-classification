@@ -1,7 +1,10 @@
 # Mental Health in Tech – Treatment Prediction
 
-![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-1.0+-F7931E?logo=scikitlearn&logoColor=white)
+[![Validate Notebook](https://github.com/ru14/tech-mental-health-classification/actions/workflows/validate_notebook.yml/badge.svg)](https://github.com/ru14/tech-mental-health-classification/actions/workflows/validate_notebook.yml)
+[![Security Scan](https://github.com/ru14/tech-mental-health-classification/actions/workflows/security_scan.yml/badge.svg)](https://github.com/ru14/tech-mental-health-classification/actions/workflows/security_scan.yml)
+[![Lint](https://github.com/ru14/tech-mental-health-classification/actions/workflows/lint.yml/badge.svg)](https://github.com/ru14/tech-mental-health-classification/actions/workflows/lint.yml)
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.4.2-F7931E?logo=scikitlearn&logoColor=white)
 ![SHAP](https://img.shields.io/badge/SHAP-Explainability-blueviolet)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
@@ -104,13 +107,37 @@ SHAP (SHapley Additive exPlanations) provides transparent, model-agnostic featur
 
 ```
 tech-mental-health-classification/
+├── .env.example                  # Environment variable template
+├── .gitattributes                # Line-ending & diff settings
+├── .gitignore
+├── .pre-commit-config.yaml       # Pre-commit hooks (nbstripout, detect-secrets, black)
+├── .python-version               # Pinned Python version (3.11)
+├── CHANGELOG.md
+├── CONTRIBUTING.md
+├── LICENSE
 ├── README.md
-├── requirements.txt
+├── SECURITY.md
+├── VERSION
+├── pyproject.toml                # Tool config (black, isort, pytest)
+├── requirements.txt              # Pinned production dependencies
+├── requirements-dev.txt          # Dev/CI dependencies
+├── .github/
+│   ├── CODEOWNERS
+│   ├── dependabot.yml
+│   ├── pull_request_template.md
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.md
+│   │   ├── feature_request.md
+│   │   └── security.md
+│   └── workflows/
+│       ├── validate_notebook.yml # Notebook execution CI
+│       ├── lint.yml              # Format & quality checks
+│       └── security_scan.yml    # pip-audit CVE scan
 ├── data/
+│   ├── README.md                 # Data provenance & privacy notes
 │   └── survey.csv
 ├── images/
-│   ├── crisp_dm_diagram.png
-│   └── mental-health-in-tech.png
+│   └── *.png
 └── notebooks/
     └── mental_health_analysis.ipynb
 ```
@@ -124,8 +151,16 @@ tech-mental-health-classification/
 git clone https://github.com/ru14/tech-mental-health-classification.git
 cd tech-mental-health-classification
 
-# Install dependencies
+# Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
+# Install production dependencies (pinned)
 pip install -r requirements.txt
+
+# (Optional) Install dev tools and pre-commit hooks
+pip install -r requirements-dev.txt
+pre-commit install
 
 # Launch the notebook
 jupyter notebook notebooks/mental_health_analysis.ipynb
@@ -142,4 +177,17 @@ jupyter notebook notebooks/mental_health_analysis.ipynb
 ## Contact
 
 For questions or feedback, reach out via the [GitHub repository](https://github.com/ru14/tech-mental-health-classification).
+
+---
+
+## Contributing
+
+Contributions are welcome! Please read [`CONTRIBUTING.md`](CONTRIBUTING.md)
+for branch naming conventions, commit message format, and the PR process.
+
+## Security
+
+To report a vulnerability, follow the instructions in
+[`SECURITY.md`](SECURITY.md). Please **do not** open a public issue for
+security matters.
 

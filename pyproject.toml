@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "tech-mental-health-classification"
+version = "1.1.0"
+description = "Predict mental health treatment-seeking behaviour in tech using ML and SHAP."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Raginee Upadhyaya" }]
+requires-python = ">=3.11"
+dependencies = [
+    "pandas==2.2.2",
+    "numpy==1.26.4",
+    "scikit-learn==1.4.2",
+    "matplotlib==3.9.0",
+    "seaborn==0.13.2",
+    "shap==0.45.1",
+    "jupyter==1.0.0",
+    "notebook==7.2.1",
+    "nbformat==5.10.4",
+]
+
+[project.urls]
+Repository = "https://github.com/ru14/tech-mental-health-classification"
+
+# =============================================================================
+# Black — code formatter
+# =============================================================================
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+include = '\.pyi?$'
+
+# =============================================================================
+# isort — import sorter (Black-compatible)
+# =============================================================================
+[tool.isort]
+profile = "black"
+line_length = 88
+
+# =============================================================================
+# pytest (if tests are added later)
+# =============================================================================
+[tool.pytest.ini_options]
+testpaths = ["tests"]
