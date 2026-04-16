@@ -1,14 +1,25 @@
-# Mental Health in Tech – Treatment Prediction
+# 🧠 Mental Health in Tech – Treatment Prediction
 
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.0+-F7931E?logo=scikitlearn&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-FF4B4B?logo=streamlit&logoColor=white)
 ![SHAP](https://img.shields.io/badge/SHAP-Explainability-blueviolet)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
+![Status](https://img.shields.io/badge/Status-Live-brightgreen)
 
 > **Can we predict whether a tech employee will seek mental health treatment based on workplace and demographic factors?**
 
 **Author:** Raginee Upadhyaya
+
+---
+
+## 🚀 Live Demo — Try the App
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/ru14/tech-mental-health-classification/main/app.py)
+
+Take the **18-question workplace mental health survey** and get an instant, personalised prediction powered by a Random Forest model trained on 1,259 real tech-industry responses.
+
+> 💬 **Found this useful? [Share it on LinkedIn](https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fgithub.com%2Fru14%2Ftech-mental-health-classification)** and help more tech professionals access mental health insights.
 
 ---
 
@@ -104,6 +115,11 @@ SHAP (SHapley Additive exPlanations) provides transparent, model-agnostic featur
 
 ```
 tech-mental-health-classification/
+├── app.py                  # 🚀 Streamlit web app (login → survey → results)
+├── src/
+│   └── train_model.py      # Model training & serialisation script
+├── models/
+│   └── rf_pipeline.pkl     # Trained Random Forest pipeline (auto-generated)
 ├── README.md
 ├── requirements.txt
 ├── data/
@@ -119,6 +135,8 @@ tech-mental-health-classification/
 
 ## Getting Started
 
+### Run the Streamlit App (recommended)
+
 ```bash
 # Clone the repository
 git clone https://github.com/ru14/tech-mental-health-classification.git
@@ -127,9 +145,25 @@ cd tech-mental-health-classification
 # Install dependencies
 pip install -r requirements.txt
 
-# Launch the notebook
+# Launch the app (model trains automatically on first start)
+streamlit run app.py
+```
+
+Then open [http://localhost:8501](http://localhost:8501) in your browser.
+
+### Run the Notebook
+
+```bash
+# Launch the analysis notebook
 jupyter notebook notebooks/mental_health_analysis.ipynb
 ```
+
+### Deploy to Streamlit Community Cloud (free)
+
+1. Fork this repo
+2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**
+3. Select your fork, branch `main`, entry point `app.py`
+4. Click **Deploy** — your app gets a public URL you can post on LinkedIn!
 
 ---
 
